@@ -1,0 +1,31 @@
+body {
+    font-family: "Roboto Mono", monospace;
+    background-color: #d9d9d9;
+    color: #333;
+}
+
+header {
+    background-color: #fafafa;
+    padding: 10px;
+    text-align: center;
+}
+
+.carousel .carousel-item{
+    height: 500px;
+}
+
+.carousel-item img{
+    position: absolute;
+    obeject-fit: cover;
+    top: 0;
+    left: 0;
+}
+
+.mainTitle {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #333;
+}
+.mainP {
+    color: #666;
+}
