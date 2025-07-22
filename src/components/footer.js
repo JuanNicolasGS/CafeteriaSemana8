@@ -53,6 +53,18 @@ let footerComponent = () => {
             <a href="#" class="text-white">Coffee.com.br</a>
           </p>
         </div>
+        <hr class="my-4" />
+        <div>
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./cardapio.html">Cardápio</a>
+            </li>
+
+          </ul>
+        </div>
       </div>`;
     }
 };
