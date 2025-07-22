@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ROBOTO FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <!-- BOOTRAP -->
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- FAVICON -->
+    <link
+      rel="shortcut icon"
+      href="./assets/image/coffee-favicon.png"
+      type="image/x-icon"
+    />
+    <title>Coffe - Cardápio</title>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header></header>
+    <!-- Main -->
+    <main>
+      <!-- SEPARATOR -->
+      <div class="container">
+        <hr />
+      </div>
+      <!-- INPUT -->
+      <div class="container mb-5">
+        <div class="labelContainer">
+          <div class="">
+            <label for="search" class="form-label mt-4">Buscar Café</label>
+          </div>
+          <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa fa-add position-absolute addIcon"></i>
+          </button>
+
+        </div>
+        <div class="container">
+          <input
+            type="text"
+            class="form-control"
+            id="search"
+            placeholder="Digite o nome do café"
+            aria-label="Search"
+          />
+        </div>
+        
+      </div>
+      <!-- TABLE -->
+      <div class="container mt-5">
+        <h2 class="text-center mb-4">Tabela de Preços</h2>
+        <p class="text-center mb-5">
+          Confira nossos preços competitivos e a qualidade excepcional dos nossos
+          cafés.
+        </p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Item</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Descrição</th>
+            </tr>
+          </thead>
+          <tbody id="home-coffee-cards"></tbody>
+        </table>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Item</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- SEPARATOR -->
+      <div class="container separator">
+        <hr />
+      </div>
+      <!-- CARD TITLE -->
+      <div class="container">
+        <h2 class="text-center mb-4">Nossos Cafés</h2>
+        <p class="text-center mb-5">
+          Explore nossa seleção de cafés, cada um com seu sabor único e
+          especial.
+        </p>
+      </div>
+      <!-- CARDS -->
+      <div class="container mt-5">
+        <div class="row cards" id="bester-coffee-cards"></div>
+      </div>
+
+    </main>
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-5 pb-4"></footer>
+    <!-- BOOTSTRAP -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS -->
+    <script src="./src/cardapio.js" type="module"></script>
+  </body>
+</html>

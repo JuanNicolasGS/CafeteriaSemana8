@@ -1,13 +1,20 @@
 body {
     font-family: "Roboto Mono", monospace;
-    background-color: #d9d9d9;
-    color: #333;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
 }
 
 header {
-    background-color: #fafafa;
+    background-color: var(--bs-body-bg);
     padding: 10px;
     text-align: center;
+}
+
+.hidden{
+    display: none;
 }
 
 .carousel .carousel-item{
@@ -16,7 +23,7 @@ header {
 
 .carousel-item img{
     position: absolute;
-    obeject-fit: cover;
+    object-fit: cover;
     top: 0;
     left: 0;
 }
@@ -24,8 +31,99 @@ header {
 .mainTitle {
     font-size: 2.5em;
     font-weight: bold;
-    color: #333;
+    color: var(--bs-body-color);
 }
-.mainP {
-    color: #666;
+/* 
+footer {
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    text-align: center;
 }
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+} */
+/* 1. ESTILO PADRÃO DO FOOTER (usado no tema claro) */
+footer {
+    /* Usa as variáveis do Bootstrap para se comportar bem no tema claro */
+    background-color: var(--bs-tertiary-bg);
+    color: var(--bs-body-color);
+    
+    /* Outros estilos para aparência */
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    text-align: center;
+    
+    /* Adiciona uma transição suave para a troca de cor */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Garante que os links no footer claro tenham a cor padrão (azul) */
+footer a {
+    color: var(--bs-link-color);
+}
+
+
+/* 2. REGRA ESPECIAL: Sobrescreve o estilo APENAS quando o tema for 'dark' */
+html[data-bs-theme="dark"] footer {
+    /* Aqui definimos cores claras FIXAS para o fundo */
+    background-color: #f8f9fa; /* Um cinza bem claro, padrão do Bootstrap light */
+    
+    /* E uma cor de texto ESCURA para contrastar com o fundo claro */
+    color: #212529;           /* Preto suave, padrão do Bootstrap light */
+}
+
+/* 3. Garante que os links no footer invertido também tenham a cor correta */
+html[data-bs-theme="dark"] footer a {
+    /* Forçamos a cor do link para o azul padrão, senão ele ficaria claro e ilegível */
+    color: #0d6efd; 
+}
+
+.labelContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button{
+    background-color: var(--bs-success);
+    color: var(--bs-body-bg);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.addIcon {
+    margin-top: 15px;
+    margin-left: 1px;
+    width: 30px;
+    height: 30px;
+}
+
+.form-label{
+    font-weight: bold;
+    color: var(--bs-body-color);
+    margin: 20px;
+}
+
+.form-control{
+    width: 100%;
+    margin-bottom: 8rem;
+}
+
+.separator{
+    margin: 4rem 0;
+    
+}
+

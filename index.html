@@ -10,7 +10,11 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
       rel="stylesheet"
     />
-
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <!-- BOOTRAP -->
     <link
       rel="stylesheet"
@@ -28,48 +32,7 @@
   </head>
   <body>
     <!-- HEADER -->
-    <header>
-      <div class="container">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              <img
-                src="./assets/image/latte.png"
-                alt="Logo"
-                width="30"
-                height="24"
-                class="d-inline-block align-text-top"
-                id="image"
-              />
-              Coffee
-            </a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#"
-                    >Home</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Cardápio</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
+    <header></header>
     <!-- Main -->
     <main class="m-5">
       <!-- TITULO -->
@@ -132,33 +95,27 @@
       </div>
       <!-- SEPARATOR -->
       <div class="container">
-        <hr >
+        <hr />
       </div>
-      <!-- CARD TITLE -->
-      <div class="container">
-        <h2 class="text-center mb-4">Nossos Cafés</h2>
+      <!-- CARDS -->
+      <div class="container mt-5" id="home-coffee-cards">
+        <h1 class="text-center mb-4">Nossos Cafés</h1>
         <p class="text-center mb-5">
           Explore nossa seleção de cafés, cada um com seu sabor único e
           especial.
         </p>
+        <div class="row cards grid homeCards" id="bester-coffee-cards"></div>
       </div>
-      <!-- CARDs -->
-       <div class="container">
-        <div class="row">
-          <!-- CARDS DINAMICOS IMPLEMENTADOS PELO JS -->
-          
-        </div>
-       </div>
     </main>
-     <!-- SEPARATOR -->
-      <div class="container">
-        <hr >
-      </div>
+    <!-- SEPARATOR -->
+    <div class="container">
+      <hr />
+    </div>
     <!-- FOOTER -->
-
+    <footer class="bg-dark text-white pt-5 pb-4"></footer>
     <!-- BOOTSTRAP -->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS -->
-    <script src="./src/sript.js"></script>
+    <script src="./src/index.js" type="module"></script>
   </body>
 </html>
