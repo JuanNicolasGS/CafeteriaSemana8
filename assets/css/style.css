@@ -127,3 +127,6 @@ html[data-bs-theme="dark"] footer a {
     
 }
 
+.mb-0{
+    margin-bottom: 0;
+}
