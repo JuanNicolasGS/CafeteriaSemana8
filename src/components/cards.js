@@ -2,7 +2,7 @@
 
 // Esta função inicializa o componente de cards, gerenciando dados e renderização.
 // Ela retorna um objeto com métodos que podem ser chamados de fora.
-const initCardsComponent = (limiteCardsVisuais = 6) => {
+const initCardsComponent = (limiteCardsVisuais = Infinity) => { // Mantido Infinity para não limitar por padrão
     // --- Funções de Manipulação de localStorage ---
     const carregarProdutos = () => {
         const produtosSalvos = localStorage.getItem("produtosCafeteria");
@@ -14,7 +14,6 @@ const initCardsComponent = (limiteCardsVisuais = 6) => {
     };
 
     // --- Array de Produtos Padrão (inicial, se localStorage estiver vazio) ---
-    // Importante: Preços como strings numéricas para padronização.
     const produtosPadrao = [
         {
             id: 1,
@@ -68,24 +67,23 @@ const initCardsComponent = (limiteCardsVisuais = 6) => {
     }
 
     // --- Referências de Elementos do DOM ---
-    // homeCoffeeCardsBody será null na index.html, mas não haverá erro se verificarmos.
     const homeCoffeeCardsBody = document.getElementById('home-coffee-cards'); // tbody da tabela
     const besterCoffeeCardsContainer = document.getElementById('bester-coffee-cards'); // div para os cards visuais
 
     // --- Funções de Renderização ---
 
     // Renderiza os produtos na tabela
-    const renderizarTabelaProdutos = () => {
-        // << CORREÇÃO AQUI: Verifica se o elemento existe antes de tentar manipulá-lo
+    // Aceita um array opcional de produtos para renderizar
+    const renderizarTabelaProdutos = (produtosParaRenderizar = produtos) => { // << Alterado: argumento opcional
         if (homeCoffeeCardsBody) {
-            homeCoffeeCardsBody.innerHTML = ''; // Limpa o conteúdo atual da tabela
+            homeCoffeeCardsBody.innerHTML = '';
 
-            if (produtos.length === 0) {
-                homeCoffeeCardsBody.innerHTML = '<tr><td colspan="4" class="text-center">Nenhum produto cadastrado.</td></tr>';
+            if (produtosParaRenderizar.length === 0) {
+                homeCoffeeCardsBody.innerHTML = '<tr><td colspan="4" class="text-center">Nenhum produto encontrado.</td></tr>'; // Mensagem ajustada para busca
                 return;
             }
 
-            produtos.forEach(produto => {
+            produtosParaRenderizar.forEach(produto => {
                 const precoFormatado = parseFloat(produto.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
                 const rowHTML = `
@@ -102,20 +100,20 @@ const initCardsComponent = (limiteCardsVisuais = 6) => {
     };
 
     // Renderiza os produtos como cards visuais
-    const renderizarCardsVisuais = () => {
-        // << CORREÇÃO AQUI: Verifica se o elemento existe antes de tentar manipulá-lo
+    // Aceita um array opcional de produtos para renderizar
+    const renderizarCardsVisuais = (produtosParaRenderizar = produtos) => { // << Alterado: argumento opcional
         if (besterCoffeeCardsContainer) {
-            besterCoffeeCardsContainer.innerHTML = ''; // Limpa o conteúdo atual dos cards
+            besterCoffeeCardsContainer.innerHTML = '';
 
-            if (produtos.length === 0) {
-                besterCoffeeCardsContainer.innerHTML = '<p class="text-center w-100">Nenhum café especial disponível no momento. Adicione um!</p>';
+            if (produtosParaRenderizar.length === 0) {
+                besterCoffeeCardsContainer.innerHTML = '<p class="text-center w-100">Nenhum café especial encontrado no momento.</p>'; // Mensagem ajustada
                 return;
             }
 
-            // Aplica o limite de cards visuais, se especificado
-            const produtosParaExibir = produtos.slice(0, limiteCardsVisuais);
+            // Aplica o limite de cards visuais, se especificado e não for Infinity
+            const produtosExibidosComLimite = (limiteCardsVisuais === Infinity) ? produtosParaRenderizar : produtosParaRenderizar.slice(0, limiteCardsVisuais);
 
-            produtosParaExibir.forEach(item => {
+            produtosExibidosComLimite.forEach(item => {
                 const precoFormatado = parseFloat(item.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
                 const cardHTML = `
@@ -143,7 +141,7 @@ const initCardsComponent = (limiteCardsVisuais = 6) => {
         produtos.push(novoProduto);
         salvarProdutos(produtos);
 
-        renderizarTabelaProdutos(); // Re-renderiza ambos os componentes
+        renderizarTabelaProdutos(); // Re-renderiza ambos os componentes com a lista completa
         renderizarCardsVisuais();
     };
 
@@ -154,9 +152,9 @@ const initCardsComponent = (limiteCardsVisuais = 6) => {
     // --- Retorna métodos que serão expostos ao `cardapio.js` ---
     return {
         adicionarProduto: adicionarProduto,
-        renderizarTabela: renderizarTabelaProdutos,
-        renderizarCards: renderizarCardsVisuais,
-        getProdutos: () => produtos
+        renderizarTabela: renderizarTabelaProdutos, // Agora pode receber um argumento para busca
+        renderizarCards: renderizarCardsVisuais,   // Agora pode receber um argumento para busca
+        getProdutos: () => produtos // Retorna a lista completa de produtos
     };
 };
 

@@ -13,9 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     footerComponent();
 
     // Inicializa o componente de cards e armazena os métodos retornados.
-    // REMOVIDO O LIMITE: Agora todos os cards serão exibidos, não apenas 6.
-    // Se quiser um limite específico, pode passar initCardsComponent(X) onde X é o número.
-    cardsModule = initCardsComponent(); 
+    // Usamos 'Infinity' como limite padrão para que todos os cards visuais apareçam no cardápio.
+    cardsModule = initCardsComponent(Infinity);
 
     // --- Lógica para o Modal de Cadastro de Item ---
     const addModalBootstrap = new bootstrap.Modal(document.getElementById('addModal')); // Instância do modal Bootstrap
@@ -64,36 +63,48 @@ document.addEventListener("DOMContentLoaded", function () {
         formCadastrarItem.reset();
     });
 
+    // --- Lógica para o Input de Busca (NOVA ADIÇÃO) ---
+    const searchInput = document.getElementById('search'); // Pega o elemento do input de busca
+    if (searchInput) {
+        searchInput.addEventListener('input', function() { // Escuta o evento 'input' (a cada digitação)
+            const searchTerm = this.value.trim().toLowerCase(); // Pega o valor, remove espaços e converte para minúsculas
+            
+            if (cardsModule && cardsModule.getProdutos && cardsModule.renderizarTabela && cardsModule.renderizarCards) {
+                const todosOsProdutos = cardsModule.getProdutos(); // Obtém todos os produtos
+
+                // Filtra os produtos com base no termo de busca
+                const produtosFiltrados = todosOsProdutos.filter(produto => {
+                    return produto.nome.toLowerCase().includes(searchTerm) || produto.descricao.toLowerCase().includes(searchTerm);
+                });
+
+                // Re-renderiza a tabela e os cards visuais com os produtos filtrados
+                cardsModule.renderizarTabela(produtosFiltrados);
+                cardsModule.renderizarCards(produtosFiltrados);
+            }
+        });
+    }
+
     // --- Opcional: Lógica para o Modal "Comprar Café" (staticBackdrop) ---
-    // Este listener é adicionado ao documento para capturar cliques nos botões "Comprar"
-    // de forma delegada, ou seja, funciona para cards existentes e novos.
     document.addEventListener('click', (event) => {
-        // Verifica se o elemento clicado é o botão "Comprar" do card
         const clickedElement = event.target;
         if (clickedElement.classList.contains('btn-outline-success') &&
             clickedElement.dataset.bsToggle === 'modal' &&
             clickedElement.dataset.bsTarget === '#staticBackdrop')
         {
-            // Encontra o elemento pai '.card' para obter o ID do produto
             const cardElement = clickedElement.closest('.card');
             const productId = cardElement ? parseInt(cardElement.dataset.id) : null;
 
-            // Se um ID válido foi encontrado e o módulo de cards está pronto
             if (productId !== null && cardsModule && cardsModule.getProdutos) {
-                const produtosAtuais = cardsModule.getProdutos(); // Obtém a lista atual de produtos
-                const product = produtosAtuais.find(p => p.id === productId); // Encontra o produto pelo ID
+                const produtosAtuais = cardsModule.getProdutos();
+                const product = produtosAtuais.find(p => p.id === productId);
 
-                // Se o produto foi encontrado, preenche e exibe o modal de compra
                 if (product) {
                     const buyModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
                     const modalTitle = document.getElementById('staticBackdropLabel');
-                    const modalBody = document.querySelector('#staticBackdrop .modal-body'); // Onde está o "WIP"
+                    const modalBody = document.querySelector('#staticBackdrop .modal-body');
 
-                    // Atualiza o título do modal
                     modalTitle.textContent = `Comprar ${product.nome}`;
 
-                    // Atualiza o corpo do modal com detalhes do produto
-                    // Você pode estilizar isso com mais CSS para ficar mais bonito
                     modalBody.innerHTML = `
                         <div class="d-flex flex-column align-items-center">
                             <img src="${product.imagem}" alt="${product.nome}" style="max-width: 150px; height: auto; margin-bottom: 15px; border-radius: 8px;">
@@ -103,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>
                     `;
 
-                    buyModal.show(); // Exibe o modal
+                    buyModal.show();
                 }
             }
         }
