@@ -13,8 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     footerComponent();
 
     // Inicializa o componente de cards e armazena os métodos retornados.
-    // O '6' é o limite de cards visuais que você quer exibir na seção "Nossos Cafés".
-    cardsModule = initCardsComponent(6);
+    // REMOVIDO O LIMITE: Agora todos os cards serão exibidos, não apenas 6.
+    // Se quiser um limite específico, pode passar initCardsComponent(X) onde X é o número.
+    cardsModule = initCardsComponent(); 
 
     // --- Lógica para o Modal de Cadastro de Item ---
     const addModalBootstrap = new bootstrap.Modal(document.getElementById('addModal')); // Instância do modal Bootstrap
